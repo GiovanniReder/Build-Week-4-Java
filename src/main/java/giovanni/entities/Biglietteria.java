@@ -2,16 +2,22 @@ package giovanni.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
- @Entity
 
+ @Entity
  @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Biglietteria {
-  @Id
+ @Id
   @GeneratedValue
 
-    protected long id;
+
+
+ protected long idRivenditore;
+
+ @OneToMany(mappedBy = "emessoDa")
+ protected List<DocumentoDiViaggio> bigliettiVenduti;
 
     private String luogo;
 
@@ -22,13 +28,13 @@ public abstract class Biglietteria {
     }
 
     public long getId() {
-        return id;
+        return idRivenditore;
     }
 
     @Override
     public String toString() {
         return "Biglietteria{" +
-                "id=" + id +
+                "id=" + idRivenditore +
                 '}';
     }
 }

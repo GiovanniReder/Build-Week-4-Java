@@ -21,12 +21,17 @@ private TipoAbbonamentoEnum tipoAbbonamento;
 
     public Abbonamento (){}
 
-    public Abbonamento(TipoAbbonamentoEnum tipoAbbonamento, LocalDate scadenza) {
-        this.tipoAbbonamento = tipoAbbonamento;
-        this.scadenza = scadenza;
-    }
+     public Abbonamento(LocalDate dataEmissione, Biglietteria emessoDa, TipoAbbonamentoEnum tipoAbbonamento) {
+         super(dataEmissione, emessoDa);
+         this.tipoAbbonamento = tipoAbbonamento;
+         if (tipoAbbonamento == TipoAbbonamentoEnum.MENSILE) this.scadenza = dataEmissione.plusMonths(1);
+         else if (tipoAbbonamento == TipoAbbonamentoEnum.SETTIMANALE)   this.scadenza = dataEmissione.plusDays(7);
+     }
 
-    public TipoAbbonamentoEnum getTipoAbbonamento() {
+
+
+
+     public TipoAbbonamentoEnum getTipoAbbonamento() {
         return tipoAbbonamento;
     }
 
