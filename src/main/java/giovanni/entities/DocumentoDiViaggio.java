@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 
  @Entity
- @Table(name="biglietti e abbonamenti")
- @Inheritance(strategy= InheritanceType.JOINED)
+  @Table(name="biglietti e abbonamenti")
+ // @Inheritance(strategy= InheritanceType.JOINED)
 
 public abstract class DocumentoDiViaggio {
 
