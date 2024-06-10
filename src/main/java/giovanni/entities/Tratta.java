@@ -14,7 +14,7 @@ public class Tratta {
 
     private String capolinea;
 
- private List<Mezzi> mezzoChePassa;
+ private List<Mezzi> mezzoTratta;
 
 
   private double tempoMedioPercorrenza;

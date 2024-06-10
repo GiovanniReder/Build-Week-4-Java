@@ -12,7 +12,7 @@ import java.time.LocalDate;
    public class Tessera {
    @Id
 
-    private long numTessera;
+    private long numeroTessera;
 
     private LocalDate emessa;
 
@@ -31,7 +31,7 @@ import java.time.LocalDate;
        }
 
     public long getNumTessera() {
-        return numTessera;
+        return numeroTessera;
     }
 
 
@@ -54,7 +54,7 @@ import java.time.LocalDate;
     @Override
     public String toString() {
         return "Tessera{" +
-                "numTessera=" + numTessera +
+                "numeroTessera=" + numeroTessera +
                 ", emessa=" + emessa +
                 ", scadenza=" + scadenza +
                 '}';
