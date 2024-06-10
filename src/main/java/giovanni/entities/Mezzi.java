@@ -32,11 +32,10 @@ public Mezzi(){}
     public Mezzi(Integer capienza, StatoMezzoEnum stato, TipoMezzoEnum tipo, double durataTratta) {
         this.capienza = capienza;
         this.stato = stato;
-        this.tipo = tipo;
+        if ( tipo == TipoMezzoEnum.BUS) this.capienza = 50;
+        else if ( tipo == TipoMezzoEnum.TRAM) this.capienza = 80;
         this.durataTratta = durataTratta;
-
     }
-
     @Override
     public String toString() {
         return "Mezzi{" +
@@ -49,3 +48,9 @@ public Mezzi(){}
                 '}';
     }
 }
+
+
+
+
+
+

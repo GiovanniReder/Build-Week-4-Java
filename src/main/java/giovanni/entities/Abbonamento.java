@@ -10,10 +10,11 @@ public class Abbonamento extends DocumentoDiViaggio{
 
 
 
-    // @Enumerated(EnumType.STRING)
+     @Enumerated(EnumType.STRING)
 private TipoAbbonamentoEnum tipoAbbonamento;
 
     private LocalDate scadenza;
+
 
 
 

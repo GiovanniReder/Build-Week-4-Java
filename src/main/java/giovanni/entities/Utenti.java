@@ -2,12 +2,12 @@ package giovanni.entities;
 
 import jakarta.persistence.*;
 
-// @Entity
+ @Entity
 public class Utenti {
 
-// @Id
-// @GeneratedValue(strategy = GenerationType.IDENTITY)
-// @OneToOne
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long numTessera;
 
 private String nome;
