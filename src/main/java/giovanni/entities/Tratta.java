@@ -1,9 +1,6 @@
 package giovanni.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -15,29 +12,31 @@ public class Tratta {
 
     private String partenza;
 
-    private String capoline;
+    private String capolinea;
 
  private List<Mezzi> mezzoChePassa;
 
 
   private double tempoMedioPercorrenza;
 
+    @OneToMany(mappedBy = "tratta")
+    private List<Mezzi> mezzi;
+
   public Tratta(){}
 
-    public Tratta(String partenza, String capoline, List<Mezzi> mezzoChePassa, double tempoMedioPercorrenza) {
+    public Tratta(String partenza, String capolinea, double tempoMedioPercorrenza) {
         this.partenza = partenza;
-        this.capoline = capoline;
-        this.mezzoChePassa = mezzoChePassa;
+        this.capolinea = capolinea;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
     }
+
 
     @Override
     public String toString() {
         return "Tratta{" +
                 "id=" + id +
                 ", partenza='" + partenza + '\'' +
-                ", capoline='" + capoline + '\'' +
-                ", mezzoChePassa=" + mezzoChePassa +
+                ", capolinea='" + capolinea + '\'' +
                 ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
                 '}';
     }

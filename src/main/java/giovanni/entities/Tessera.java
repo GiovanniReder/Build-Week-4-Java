@@ -7,11 +7,10 @@ import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
- @Entity
- @Table
-public class Tessera {
+   @Entity
+   @Table
+   public class Tessera {
    @Id
-
 
     private long numTessera;
 
@@ -19,12 +18,17 @@ public class Tessera {
 
     private LocalDate scadenza;
 
+    @OneToOne(mappedBy = "tessera")
+    private Utenti utente;
+
+
     public Tessera (){}
 
-    public Tessera(LocalDate emessa, LocalDate scadenza) {
-        this.emessa = emessa;
-        this.scadenza = scadenza;
-    }
+
+       public Tessera(LocalDate emessa, LocalDate scadenza) {
+           this.emessa = emessa;
+           this.scadenza = scadenza;
+       }
 
     public long getNumTessera() {
         return numTessera;

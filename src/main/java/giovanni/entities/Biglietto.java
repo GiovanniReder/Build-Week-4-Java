@@ -6,10 +6,7 @@ import java.time.LocalDate;
 
  @Entity
 
-public class Biglietto extends DocumentoDiViaggio{
-
-
-
+public class Biglietto extends TitoloDiViaggio{
 
     // COLLEGATO AI MEZZI
   //  @OneToOne(mappedBy = "idBigliettiTimbrato")
@@ -20,13 +17,19 @@ public class Biglietto extends DocumentoDiViaggio{
     // DA COLLEGARE CON LA CLASSE MEZZI
     private String luogoValidazione;
 
-public Biglietto(){}
+     @ManyToOne
+     @JoinColumn(name = "mezzo_id")
+     private Mezzi mezzo;
 
-    public Biglietto(Boolean validato, LocalDate dataValidazione, String luogoValidazione) {
-        this.validato = validato;
-        this.dataValidazione = dataValidazione;
-        this.luogoValidazione = luogoValidazione;
-    }
+
+     public Biglietto(){}
+
+     public Biglietto(Boolean validato, LocalDate dataValidazione, String luogoValidazione, Mezzi mezzo) {
+         this.validato = validato;
+         this.dataValidazione = dataValidazione;
+         this.luogoValidazione = luogoValidazione;
+         this.mezzo = mezzo;
+     }
 
     public Boolean getValidato() {
         return validato;
@@ -52,4 +55,13 @@ public Biglietto(){}
         this.dataValidazione = dataValidazione;
     }
 
+     @Override
+     public String toString() {
+         return "Biglietto{" +
+                 "validato=" + validato +
+                 ", dataValidazione=" + dataValidazione +
+                 ", luogoValidazione='" + luogoValidazione + '\'' +
+                 ", mezzo=" + mezzo +
+                 '}';
+     }
 }

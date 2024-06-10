@@ -1,27 +1,22 @@
 package giovanni.entities;
 
 import jakarta.persistence.*;
-
 import java.util.List;
-import java.util.UUID;
 
-
- @Entity
- @Inheritance(strategy=InheritanceType.JOINED)
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Biglietteria {
- @Id
-  @GeneratedValue
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long idRivenditore;
 
-
- protected long idRivenditore;
-
- @OneToMany(mappedBy = "emessoDa")
- protected List<DocumentoDiViaggio> bigliettiVenduti;
+    @OneToMany(mappedBy = "emessoDa")
+    protected List<TitoloDiViaggio> bigliettiVenduti;
 
     private String luogo;
 
-    public Biglietteria(){}
+    public Biglietteria() {}
 
     public Biglietteria(String luogo) {
         this.luogo = luogo;
@@ -31,10 +26,27 @@ public abstract class Biglietteria {
         return idRivenditore;
     }
 
+    public String getLuogo() {
+        return luogo;
+    }
+
+    public void setLuogo(String luogo) {
+        this.luogo = luogo;
+    }
+
+    public List<TitoloDiViaggio> getBigliettiVenduti() {
+        return bigliettiVenduti;
+    }
+
+    public void setBigliettiVenduti(List<TitoloDiViaggio> bigliettiVenduti) {
+        this.bigliettiVenduti = bigliettiVenduti;
+    }
+
     @Override
     public String toString() {
         return "Biglietteria{" +
                 "id=" + idRivenditore +
+                ", luogo='" + luogo + '\'' +
                 '}';
     }
 }

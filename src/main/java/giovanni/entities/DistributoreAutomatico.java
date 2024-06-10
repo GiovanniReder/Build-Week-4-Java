@@ -2,16 +2,14 @@ package giovanni.entities;
 
 import jakarta.persistence.Entity;
 
- @Entity
-public class Automatico extends Biglietteria {
+@Entity
+public class DistributoreAutomatico extends Biglietteria {
+
     private Boolean inFunzione;
 
+    public DistributoreAutomatico() {}
 
-    public Automatico(Boolean inFunzione) {
-        this.inFunzione = inFunzione;
-    }
-
-    public Automatico(String luogo, Boolean inFunzione) {
+    public DistributoreAutomatico(String luogo, Boolean inFunzione) {
         super(luogo);
         this.inFunzione = inFunzione;
     }
@@ -26,8 +24,9 @@ public class Automatico extends Biglietteria {
 
     @Override
     public String toString() {
-        return "Automatico{" +
+        return "DistributoreAutomatico{" +
                 "inFunzione=" + inFunzione +
+                ", luogo='" + getLuogo() + '\'' +
                 '}';
     }
 }

@@ -2,16 +2,20 @@ package giovanni.entities;
 
 import jakarta.persistence.*;
 
- @Entity
+import java.util.List;
+
+@Entity
 public class Utenti {
 
  @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @OneToOne
+ @JoinColumn(name = "tessera_id")
+ private Tessera tessera;
 
-    private long numTessera;
-
-private String nome;
-private String cognome;
+ @OneToMany(mappedBy = "utente")
+ private List<Abbonamento> abbonamenti;
+ private String nome;
+ private String cognome;
 
 public Utenti(){}
 
@@ -20,10 +24,8 @@ public Utenti(){}
         this.nome = nome;
     }
 
-    @Override
     public String toString() {
         return "Utenti{" +
-                "numTessera=" + numTessera +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 '}';
