@@ -6,10 +6,10 @@ import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
 
-@Entity
+// @Entity
 public class Tessera {
-    @Id
-    @OneToOne
+  //  @Id
+   // @OneToOne
     private long numTessera;
 
     private LocalDate emessa;

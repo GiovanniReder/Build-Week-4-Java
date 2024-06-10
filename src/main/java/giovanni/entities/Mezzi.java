@@ -6,24 +6,25 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Table
+// @Entity
 public class Mezzi {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //   @Id
+  //   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private Integer capienza;
-@Enumerated(EnumType.STRING)
+// @Enumerated(EnumType.STRING)
     private StatoMezzoEnum stato ;
 
 
-@Enumerated(EnumType.STRING)
+// @Enumerated(EnumType.STRING)
     private TipoMezzoEnum tipo;
 
-@ManyToOne
+// @ManyToOne
 private double durataTratta;
 
-@ManyToOne
+// COLLEGATO A BIGLIETTO
+// @ManyToOne
 private List<Biglietto> idBigliettiTimbrato;
 
 public Mezzi(){}

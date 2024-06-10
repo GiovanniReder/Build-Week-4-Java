@@ -1,17 +1,18 @@
 package giovanni.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-@Entity
+ @Entity
 
-public class Biglietto extends Biglietteria{
+public class Biglietto extends DocumentoDiViaggio{
 
-    // DA COLLEGARE AI MEZZI
-    @OneToOne(mappedBy = "idBigliettiTimbrato")
+
+
+
+    // COLLEGATO AI MEZZI
+  //  @OneToOne(mappedBy = "idBigliettiTimbrato")
     private Boolean validato;
 
     private LocalDate dataValidazione;

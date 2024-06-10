@@ -5,16 +5,17 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-@Entity
-public class Abbonamento extends Biglietteria{
+ @Entity
+public class Abbonamento extends DocumentoDiViaggio{
 
-    @Enumerated(EnumType.STRING)
+
+
+    // @Enumerated(EnumType.STRING)
 private TipoAbbonamentoEnum tipoAbbonamento;
 
     private LocalDate scadenza;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
 
     protected long idTessera;
 

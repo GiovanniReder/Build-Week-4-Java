@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Entity
-@Table(name="biglietteria")
-@Inheritance( strategy=InheritanceType.SINGLE_TABLE)
+ @Entity
+
+ @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Biglietteria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue
 
     protected long id;
 
