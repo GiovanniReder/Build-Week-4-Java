@@ -1,13 +1,11 @@
 package giovanni.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
-   @Entity
+@Entity
    @Table
    public class Tessera {
    @Id
@@ -20,6 +18,9 @@ import java.time.LocalDate;
 
     @OneToOne(mappedBy = "tessera")
     private Utenti utente;
+
+    @OneToMany(mappedBy = "tessera")
+    private List<Abbonamento> abbonamenti;
 
 
     public Tessera (){}

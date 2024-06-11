@@ -12,8 +12,6 @@ public class Utenti {
  @JoinColumn(name = "tessera_id")
  private Tessera tessera;
 
- @OneToMany(mappedBy = "utente")
- private List<Abbonamento> abbonamenti;
  private String nome;
  private String cognome;
 

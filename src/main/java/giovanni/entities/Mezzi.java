@@ -3,19 +3,17 @@ package giovanni.entities;
 import giovanni.enums.StatoMezzoEnum;
 import giovanni.enums.TipoMezzoEnum;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Mezzi {
-
+public class Mezzi  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private Integer capienza;
 
-    @Enumerated(EnumType.STRING)
-    private StatoMezzoEnum stato;
 
     @Enumerated(EnumType.STRING)
     private TipoMezzoEnum tipo;
@@ -29,11 +27,14 @@ public class Mezzi {
     @JoinColumn(name = "tratta_percorsa")
     private Tratta tratta;
 
+    @ManyToMany(mappedBy = "mezzi")
+    private List<Manutenzione> manutenzione;
+
+
     public Mezzi() {}
 
-    public Mezzi(Integer capienza, StatoMezzoEnum stato, TipoMezzoEnum tipo, double durataTratta) {
+    public Mezzi(Integer capienza, TipoMezzoEnum tipo, double durataTratta) {
         this.capienza = capienza;
-        this.stato = stato;
         if (tipo == TipoMezzoEnum.BUS) {
             this.capienza = 50;
         } else if (tipo == TipoMezzoEnum.TRAM) {
@@ -54,13 +55,6 @@ public class Mezzi {
         this.capienza = capienza;
     }
 
-    public StatoMezzoEnum getStato() {
-        return stato;
-    }
-
-    public void setStato(StatoMezzoEnum stato) {
-        this.stato = stato;
-    }
 
     public TipoMezzoEnum getTipo() {
         return tipo;
@@ -92,7 +86,6 @@ public class Mezzi {
         return "Mezzi{" +
                 "id=" + id +
                 ", capienza=" + capienza +
-                ", stato=" + stato +
                 ", tipo=" + tipo +
                 ", durataTratta=" + durataTratta +
                 ", bigliettiTimbrati=" + bigliettiTimbrati +
