@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Biglietteria {
 

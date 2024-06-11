@@ -1,8 +1,10 @@
 package giovanni.entities;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("rivenditore")
 public class Rivenditore extends Biglietteria {
 
     public Rivenditore() {}

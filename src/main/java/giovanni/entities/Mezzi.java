@@ -33,8 +33,8 @@ public class Mezzi  {
 
     public Mezzi() {}
 
-    public Mezzi(Integer capienza, TipoMezzoEnum tipo, double durataTratta) {
-        this.capienza = capienza;
+    public Mezzi( TipoMezzoEnum tipo, double durataTratta) {
+        this.tipo = tipo;
         if (tipo == TipoMezzoEnum.BUS) {
             this.capienza = 50;
         } else if (tipo == TipoMezzoEnum.TRAM) {

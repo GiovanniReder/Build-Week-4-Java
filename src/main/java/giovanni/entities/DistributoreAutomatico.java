@@ -1,9 +1,14 @@
 package giovanni.entities;
 
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("distributore_automatico")
 public class DistributoreAutomatico extends Biglietteria {
+
 
     private Boolean inFunzione;
 
