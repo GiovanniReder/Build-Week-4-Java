@@ -4,40 +4,43 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-// @Entity
+ @Entity
+ @Table
 public class Tratta {
-   // @Id
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String partenza;
 
     private String capolinea;
 
- private List<Mezzi> mezzoTratta;
-
 
   private double tempoMedioPercorrenza;
 
-    @OneToMany(mappedBy = "tratta")
+    @OneToMany
     private List<Mezzi> mezzi;
+
+
 
   public Tratta(){}
 
-    public Tratta(String partenza, String capolinea, double tempoMedioPercorrenza) {
-        this.partenza = partenza;
-        this.capolinea = capolinea;
-        this.tempoMedioPercorrenza = tempoMedioPercorrenza;
-    }
 
+     public Tratta(String capolinea, String partenza, double tempoMedioPercorrenza, List<Mezzi> mezzi) {
+         this.capolinea = capolinea;
+         this.partenza = partenza;
+         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
+         this.mezzi = mezzi;
+     }
 
-    @Override
-    public String toString() {
-        return "Tratta{" +
-                "id=" + id +
-                ", partenza='" + partenza + '\'' +
-                ", capolinea='" + capolinea + '\'' +
-                ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
-                '}';
-    }
-}
+     @Override
+     public String toString() {
+         return "Tratta{" +
+                 "id=" + id +
+                 ", partenza='" + partenza + '\'' +
+                 ", capolinea='" + capolinea + '\'' +
+                 ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
+                 ", mezzi=" + mezzi +
+                 '}';
+     }
+ }

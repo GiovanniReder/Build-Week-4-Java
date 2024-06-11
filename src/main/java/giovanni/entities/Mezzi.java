@@ -25,6 +25,10 @@ public class Mezzi {
     @OneToMany(mappedBy = "mezzo")
     private List<Biglietto> bigliettiTimbrati;
 
+    @ManyToOne
+    @JoinColumn(name = "tratta_percorsa")
+    private Tratta tratta;
+
     public Mezzi() {}
 
     public Mezzi(Integer capienza, StatoMezzoEnum stato, TipoMezzoEnum tipo, double durataTratta) {
