@@ -88,7 +88,6 @@ public class Mezzi  {
                 ", capienza=" + capienza +
                 ", tipo=" + tipo +
                 ", durataTratta=" + durataTratta +
-                ", bigliettiTimbrati=" + bigliettiTimbrati +
                 '}';
     }
 }
