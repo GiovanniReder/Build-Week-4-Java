@@ -4,8 +4,6 @@ import giovanni.entities.Biglietteria;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-import java.util.UUID;
-
 public class BiglietteriaDAO {
     private EntityManager entityManager;
 
@@ -38,7 +36,7 @@ public class BiglietteriaDAO {
                 trans.begin();
                 entityManager.remove(found);
                 trans.commit();
-                System.out.println("Biglietteria con ID "+ id + " eliminata ");
+                System.out.println("Biglietteria con ID " + id + " eliminata ");
             } else System.out.println("Elemento non trovato");
 
         } catch (Exception e) {
@@ -46,4 +44,6 @@ public class BiglietteriaDAO {
         }
 
     }
+
+
 }

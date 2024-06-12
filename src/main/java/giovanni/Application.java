@@ -4,10 +4,11 @@ import giovanni.DAO.BiglietteriaDAO;
 import giovanni.DAO.TesseraDAO;
 import giovanni.DAO.TitoloDiViaggioDAO;
 import giovanni.DAO.UtentiDAO;
+import giovanni.entities.Abbonamento;
 import giovanni.entities.Biglietteria;
-import giovanni.entities.Biglietto;
 import giovanni.entities.Tessera;
 import giovanni.entities.Utenti;
+import giovanni.enums.TipoAbbonamentoEnum;
 import giovanni.supplier.Suppliers;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,10 +49,13 @@ public class Application {
         Biglietteria daDB = bd.searchById(1);
 
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
-        Biglietto b1 = new Biglietto(LocalDate.now(), daDB, false);
-        tvd.save(b1);
+        Abbonamento ab1 = new Abbonamento(LocalDate.now(), daDB, TipoAbbonamentoEnum.SETTIMANALE, tDB);
+//        tvd.save(ab1);
 
+//        LocalDate creazioneAbbonamento1 = LocalDate.of(2023 , 5 , 12);
+//        Abbonamento abbonamento1 = new Abbonamento(creazioneAbbonamento1 , daDB , TipoAbbonamentoEnum.MENSILE , tDB);
 
+//        td.rinnovoTessera(2);
         em.close();
         emf.close();
 

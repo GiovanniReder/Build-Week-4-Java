@@ -1,6 +1,5 @@
 package giovanni.DAO;
 
-import giovanni.entities.Manutenzione;
 import giovanni.entities.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -37,7 +36,7 @@ public class TitoloDiViaggioDAO {
                 trans.begin();
                 entityManager.remove(found);
                 trans.commit();
-                System.out.println("Titolo di viaggio con ID "+ id + " eliminato ");
+                System.out.println("Titolo di viaggio con ID " + id + " eliminato ");
             } else System.out.println("Elemento non trovato");
 
         } catch (Exception e) {
@@ -45,4 +44,6 @@ public class TitoloDiViaggioDAO {
         }
 
     }
+
+
 }
