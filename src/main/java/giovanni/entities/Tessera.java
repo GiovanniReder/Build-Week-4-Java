@@ -6,30 +6,33 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-   @Table
-   public class Tessera {
-   @Id
-
+@Table
+public class Tessera {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numeroTessera;
 
     private LocalDate emessa;
 
     private LocalDate scadenza;
 
-    @OneToOne(mappedBy = "tessera")
+    @OneToOne
+    @JoinColumn(name = "utente_id")
     private Utenti utente;
 
     @OneToMany(mappedBy = "tessera")
     private List<Abbonamento> abbonamenti;
 
 
-    public Tessera (){}
+    public Tessera() {
+    }
 
 
-       public Tessera(LocalDate emessa, LocalDate scadenza) {
-           this.emessa = emessa;
-           this.scadenza = scadenza;
-       }
+    public Tessera(LocalDate emessa, Utenti utenteId) {
+        this.emessa = emessa;
+        this.scadenza = emessa.plusYears(1);
+        this.utente = utenteId;
+    }
 
     public long getNumTessera() {
         return numeroTessera;

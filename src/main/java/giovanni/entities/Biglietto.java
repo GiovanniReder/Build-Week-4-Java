@@ -1,15 +1,17 @@
 package giovanni.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
 
- @Entity
+@Entity
 
-public class Biglietto extends TitoloDiViaggio{
+public class Biglietto extends TitoloDiViaggio {
 
     // COLLEGATO AI MEZZI
-  //  @OneToOne(mappedBy = "idBigliettiTimbrato")
+    //  @OneToOne(mappedBy = "idBigliettiTimbrato")
     private Boolean validato;
 
     private LocalDate dataValidazione;
@@ -17,19 +19,20 @@ public class Biglietto extends TitoloDiViaggio{
     // DA COLLEGARE CON LA CLASSE MEZZI
     private String luogoValidazione;
 
-     @ManyToOne
-     @JoinColumn(name = "mezzo_id")
-     private Mezzi mezzo;
+    @ManyToOne
+    @JoinColumn(name = "mezzo_id")
+    private Mezzi mezzo;
 
 
-     public Biglietto(){}
+    public Biglietto() {
+    }
 
-     public Biglietto(Boolean validato, LocalDate dataValidazione, String luogoValidazione, Mezzi mezzo) {
-         this.validato = validato;
-         this.dataValidazione = dataValidazione;
-         this.luogoValidazione = luogoValidazione;
-         this.mezzo = mezzo;
-     }
+    public Biglietto(Boolean validato, LocalDate dataValidazione, String luogoValidazione) {
+        this.validato = validato;
+        this.dataValidazione = dataValidazione;
+        this.luogoValidazione = luogoValidazione;
+
+    }
 
     public Boolean getValidato() {
         return validato;
@@ -55,13 +58,13 @@ public class Biglietto extends TitoloDiViaggio{
         this.dataValidazione = dataValidazione;
     }
 
-     @Override
-     public String toString() {
-         return "Biglietto{" +
-                 "validato=" + validato +
-                 ", dataValidazione=" + dataValidazione +
-                 ", luogoValidazione='" + luogoValidazione + '\'' +
-                 ", mezzo=" + mezzo +
-                 '}';
-     }
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "validato=" + validato +
+                ", dataValidazione=" + dataValidazione +
+                ", luogoValidazione='" + luogoValidazione + '\'' +
+                ", mezzo=" + mezzo +
+                '}';
+    }
 }

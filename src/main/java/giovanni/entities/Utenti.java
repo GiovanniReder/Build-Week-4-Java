@@ -2,25 +2,34 @@ package giovanni.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Utenti {
 
- @Id
- @OneToOne
- @JoinColumn(name = "tessera_id")
- private Tessera tessera;
 
- private String nome;
- private String cognome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-public Utenti(){}
+
+    @OneToOne(mappedBy = "utente")
+
+    private Tessera tessera;
+
+    private String nome;
+    private String cognome;
+
+    public Utenti() {
+    }
 
     public Utenti(String cognome, String nome) {
         this.cognome = cognome;
         this.nome = nome;
     }
+
+    public long getId() {
+        return id;
+    }
+
 
     public Tessera getTessera() {
         return tessera;
@@ -46,8 +55,11 @@ public Utenti(){}
         this.cognome = cognome;
     }
 
+    @Override
     public String toString() {
         return "Utenti{" +
+                "id=" + id +
+                ", tessera=" + tessera +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 '}';
