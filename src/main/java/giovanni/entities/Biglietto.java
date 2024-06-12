@@ -17,7 +17,7 @@ public class Biglietto extends TitoloDiViaggio {
     private LocalDate dataValidazione;
 
     // DA COLLEGARE CON LA CLASSE MEZZI
-    private String luogoValidazione;
+
 
     @ManyToOne
     @JoinColumn(name = "mezzo_id")
@@ -27,11 +27,9 @@ public class Biglietto extends TitoloDiViaggio {
     public Biglietto() {
     }
 
-    public Biglietto(Boolean validato, LocalDate dataValidazione, String luogoValidazione) {
+    public Biglietto(LocalDate dataEmissione, Biglietteria emessoDa, Boolean validato) {
+        super(dataEmissione, emessoDa);
         this.validato = validato;
-        this.dataValidazione = dataValidazione;
-        this.luogoValidazione = luogoValidazione;
-
     }
 
     public Boolean getValidato() {
@@ -42,13 +40,6 @@ public class Biglietto extends TitoloDiViaggio {
         this.validato = validato;
     }
 
-    public String getLuogoValidazione() {
-        return luogoValidazione;
-    }
-
-    public void setLuogoValidazione(String luogoValidazione) {
-        this.luogoValidazione = luogoValidazione;
-    }
 
     public LocalDate getDataValidazione() {
         return dataValidazione;
@@ -63,7 +54,6 @@ public class Biglietto extends TitoloDiViaggio {
         return "Biglietto{" +
                 "validato=" + validato +
                 ", dataValidazione=" + dataValidazione +
-                ", luogoValidazione='" + luogoValidazione + '\'' +
                 ", mezzo=" + mezzo +
                 '}';
     }

@@ -48,8 +48,8 @@ public class Application {
         Biglietteria daDB = bd.searchById(1);
 
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
-        Biglietto ab1 = new Biglietto(false, LocalDate.now(), "Roma");
-        tvd.save(ab1);
+        Biglietto b1 = new Biglietto(LocalDate.now(), daDB, false);
+        tvd.save(b1);
 
 
         em.close();
