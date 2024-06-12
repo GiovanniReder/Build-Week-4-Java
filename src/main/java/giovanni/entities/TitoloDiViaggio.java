@@ -1,11 +1,13 @@
 package giovanni.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name="titolo_di_viaggio")
+@Table(name = "titolo_di_viaggio")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_di_titolo")
 public abstract class TitoloDiViaggio {
 
     @Id
@@ -18,7 +20,8 @@ public abstract class TitoloDiViaggio {
 
     protected LocalDate dataEmissione;
 
-    public TitoloDiViaggio() {}
+    public TitoloDiViaggio() {
+    }
 
     public TitoloDiViaggio(LocalDate dataEmissione, Biglietteria emessoDa) {
         this.dataEmissione = dataEmissione;

@@ -1,14 +1,12 @@
 package giovanni.entities;
 
 import giovanni.enums.TipoAbbonamentoEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@DiscriminatorValue("abbonamento")
 public class Abbonamento extends TitoloDiViaggio {
 
 

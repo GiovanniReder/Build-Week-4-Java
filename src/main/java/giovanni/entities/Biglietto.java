@@ -1,5 +1,6 @@
 package giovanni.entities;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -7,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
-
+@DiscriminatorValue("biglietto")
 public class Biglietto extends TitoloDiViaggio {
 
     // COLLEGATO AI MEZZI
