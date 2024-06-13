@@ -55,7 +55,9 @@ public class Application {
 
 //        td.rinnovoTessera(2);
 
-        tvd.numeroBigliettiVenduti(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
+//        tvd.numeroBigliettiVenduti(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
+
+        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
         em.close();
         emf.close();
 

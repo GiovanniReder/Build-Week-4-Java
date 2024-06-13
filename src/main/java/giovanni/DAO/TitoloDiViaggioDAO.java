@@ -1,5 +1,6 @@
 package giovanni.DAO;
 
+import giovanni.entities.Biglietteria;
 import giovanni.entities.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -63,6 +64,26 @@ public class TitoloDiViaggioDAO {
 
         System.out.println("Il numero venduti  di biglietti è " + queryBiglietto.getSingleResult() + " mentre quello di abbonamenti è " + queryAbb.getSingleResult());
 
+
+    }
+
+    public void titoliViaggioPerPuntoEmissione(LocalDate date1, LocalDate date2, long idBiglietteria) {
+
+        BiglietteriaDAO bdv = new BiglietteriaDAO(entityManager);
+        Biglietteria biglietti = bdv.searchById(idBiglietteria);
+
+
+        Query query = entityManager.createQuery("SELECT COUNT(t)  FROM Biglietto t WHERE  t.emessoDa = :idBiglietteria AND t.dataEmissione BETWEEN :date1 AND :date2  ");
+        query.setParameter("date1", date1);
+        query.setParameter("date2", date2);
+        query.setParameter("idBiglietteria", biglietti);
+        Query query1 = entityManager.createQuery("SELECT COUNT(t)  FROM Abbonamento t WHERE  t.emessoDa = :idBiglietteria AND t.dataEmissione BETWEEN :date1 AND :date2  ");
+        query1.setParameter("date1", date1);
+        query1.setParameter("date2", date2);
+        query1.setParameter("idBiglietteria", biglietti);
+
+
+        System.out.println("la biglietteria " + biglietti.getId() + " ha emesso  biglietti: " + query.getSingleResult() + " e  abbonamenti: " + query1.getSingleResult());
 
     }
 
