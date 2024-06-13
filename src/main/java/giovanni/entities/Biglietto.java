@@ -39,6 +39,7 @@ public class Biglietto extends TitoloDiViaggio {
 
     public void setValidato(Boolean validato) {
         this.validato = validato;
+        System.out.println("Il biglietto è stato validato");
     }
 
 
