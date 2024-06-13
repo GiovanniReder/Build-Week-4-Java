@@ -1,8 +1,6 @@
 package giovanni;
 
-import giovanni.DAO.BiglietteriaDAO;
-import giovanni.DAO.TesseraDAO;
-import giovanni.DAO.TitoloDiViaggioDAO;
+import giovanni.DAO.*;
 import giovanni.entities.*;
 import giovanni.supplier.Suppliers;
 import jakarta.persistence.EntityManager;
@@ -10,6 +8,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
 
@@ -59,6 +59,22 @@ public class Application {
 
 //        tvd.verificaAbbonamentoDallaTessera(2);
 //        bd.creaBiglietto(4);
+
+        MezziDAO md = new MezziDAO(em);
+//        Mezzi tram = md.searchById(2);
+//        Mezzi atac = md.searchById(1);
+//
+        List<Mezzi> mezziRoma = new ArrayList<>();
+//        mezziRoma.add(tram);
+//        mezziRoma.add(atac);
+//
+        ManutenzioneDAO manuDao = new ManutenzioneDAO(em);
+        Manutenzione manu1 = new Manutenzione(LocalDate.of(2023, 9, 12), LocalDate.of(2023, 10, 25), mezziRoma);
+//        manuDao.save(manu1);
+
+        manuDao.periodoManutenzione(1).forEach(System.out::println);
+
+
         em.close();
         emf.close();
 
