@@ -41,7 +41,7 @@ public class Application {
 
         BiglietteriaDAO bd = new BiglietteriaDAO(em);
 
-        DistributoreAutomatico da1 = new DistributoreAutomatico("Roma", true);
+        DistributoreAutomatico da1 = new DistributoreAutomatico("avellino", false);
 //        bd.save(da1);
         Tessera tDB = td.searchById(2);
         Biglietteria daDB = bd.searchById(1);
@@ -59,7 +59,8 @@ public class Application {
 
 //        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
 
-        tvd.verificaAbbonamentoDallaTessera(2);
+//        tvd.verificaAbbonamentoDallaTessera(2);
+//        bd.creaAbbonamento(2, TipoAbbonamentoEnum.MENSILE, 2);
         em.close();
         emf.close();
 
