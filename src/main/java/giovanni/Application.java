@@ -57,7 +57,9 @@ public class Application {
 
 //        tvd.numeroBigliettiVenduti(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
 
-        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
+//        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
+
+        tvd.verificaAbbonamentoDallaTessera(2);
         em.close();
         emf.close();
 

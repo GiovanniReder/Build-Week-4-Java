@@ -1,6 +1,8 @@
 package giovanni.DAO;
 
+import giovanni.entities.Abbonamento;
 import giovanni.entities.Biglietteria;
+import giovanni.entities.Tessera;
 import giovanni.entities.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -85,6 +87,27 @@ public class TitoloDiViaggioDAO {
 
         System.out.println("la biglietteria " + biglietti.getId() + " ha emesso  biglietti: " + query.getSingleResult() + " e  abbonamenti: " + query1.getSingleResult());
 
+    }
+
+    public void verificaAbbonamentoDallaTessera(long idTessera) {
+
+        TesseraDAO td = new TesseraDAO(entityManager);
+        Tessera tessera = td.searchById(idTessera);
+
+
+        Query query = entityManager.createQuery("SELECT t FROM TitoloDiViaggio t WHERE t.tessera = :idTessera");
+        query.setParameter("idTessera", tessera);
+
+        Abbonamento abbonamento = (Abbonamento) query.getSingleResult();
+
+        if (tessera.getScadenza().isBefore(LocalDate.now())) {
+            System.out.println("hai la tessera scaduta ");
+
+        } else if (abbonamento.getScadenza().isBefore(LocalDate.now())) {
+            System.out.println("il tuo abbonamento è scaduto");
+        } else {
+            System.out.println("il tuo abbonamento è valido");
+        }
     }
 
 
