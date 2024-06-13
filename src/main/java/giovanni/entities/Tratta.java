@@ -18,19 +18,19 @@ public class Tratta {
 
     private double tempoMedioPercorrenza;
 
-    @OneToMany
-    private List<Mezzi> mezzi;
+    @OneToMany(mappedBy = "tratta")
+    private List<TrattaMezzi> percorsi;
 
 
     public Tratta() {
     }
 
 
-    public Tratta(String capolinea, String partenza, double tempoMedioPercorrenza, List<Mezzi> mezzi) {
+    public Tratta(String capolinea, String partenza, double tempoMedioPercorrenza) {
         this.capolinea = capolinea;
         this.partenza = partenza;
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
-        this.mezzi = mezzi;
+
     }
 
     public long getId() {
@@ -62,13 +62,6 @@ public class Tratta {
         this.tempoMedioPercorrenza = tempoMedioPercorrenza;
     }
 
-    public List<Mezzi> getMezzi() {
-        return mezzi;
-    }
-
-    public void setMezzi(List<Mezzi> mezzi) {
-        this.mezzi = mezzi;
-    }
 
     @Override
     public String toString() {
@@ -77,7 +70,6 @@ public class Tratta {
                 ", partenza='" + partenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
                 ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
-                ", mezzi=" + mezzi +
                 '}';
     }
 }

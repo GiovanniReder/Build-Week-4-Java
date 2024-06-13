@@ -3,9 +3,7 @@ package giovanni.supplier;
 import com.github.javafaker.Faker;
 import giovanni.DAO.*;
 import giovanni.entities.DistributoreAutomatico;
-import giovanni.entities.Mezzi;
 import giovanni.entities.Utenti;
-import giovanni.enums.TipoMezzoEnum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -59,21 +57,21 @@ public class Suppliers {
 
     ;
 
-    public void creaMezzi() {
-        for (int i = 0; i < 50; i++) {
-            Mezzi mezzi = new Mezzi(TipoMezzoEnum.BUS, faker.number().randomDouble(2, 20, 120));
-            mezziDAO.save(mezzi);
-        }
-    }
-
-    ;
-
-    public void creaMezzi2() {
-        for (int i = 0; i < 50; i++) {
-            Mezzi mezzi = new Mezzi(TipoMezzoEnum.TRAM, faker.number().randomDouble(2, 20, 120));
-            mezziDAO.save(mezzi);
-        }
-    }
+//    public void creaMezzi() {
+//        for (int i = 0; i < 50; i++) {
+//            Mezzi mezzi = new Mezzi(TipoMezzoEnum.BUS, faker.number().randomDouble(2, 20, 120));
+//            mezziDAO.save(mezzi);
+//        }
+//    }
+//
+//    ;
+//
+//    public void creaMezzi2() {
+//        for (int i = 0; i < 50; i++) {
+//            Mezzi mezzi = new Mezzi(TipoMezzoEnum.TRAM, faker.number().randomDouble(2, 20, 120));
+//            mezziDAO.save(mezzi);
+//        }
+//    }
 
     ;
 

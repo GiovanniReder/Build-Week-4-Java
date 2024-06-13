@@ -2,14 +2,13 @@ package giovanni;
 
 import giovanni.DAO.*;
 import giovanni.entities.*;
+import giovanni.enums.TipoMezzoEnum;
 import giovanni.supplier.Suppliers;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Application {
 
@@ -61,15 +60,18 @@ public class Application {
 //        bd.creaBiglietto(4);
 
         MezziDAO md = new MezziDAO(em);
-//        Mezzi tram = md.searchById(2);
-//        Mezzi atac = md.searchById(1);
+        Mezzi bus = new Mezzi(TipoMezzoEnum.BUS);
+        Mezzi tram = new Mezzi(TipoMezzoEnum.TRAM);
+//        md.save(bus);
+//        md.save(tram);
+        Mezzi atac = md.searchById(1);
 //
-        List<Mezzi> mezziRoma = new ArrayList<>();
+//        List<Mezzi> mezziRoma = new ArrayList<>();
 //        mezziRoma.add(tram);
 //        mezziRoma.add(atac);
 //
-        ManutenzioneDAO manuDao = new ManutenzioneDAO(em);
-        Manutenzione manu1 = new Manutenzione(LocalDate.of(2023, 9, 12), LocalDate.of(2023, 10, 25), mezziRoma);
+//        ManutenzioneDAO manuDao = new ManutenzioneDAO(em);
+//        Manutenzione manu1 = new Manutenzione(LocalDate.of(2023, 9, 12), LocalDate.of(2023, 10, 25));
 //        manuDao.save(manu1);
 
 //        manuDao.periodoManutenzione(1).forEach(System.out::println);
@@ -80,9 +82,17 @@ public class Application {
 
 //        md.bigliettiVidimati(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
 
-//        TrattaDAO t1 = new TrattaDAO(em);
-//        Tratta tratta = new Tratta("Ponte Mammolo", "Tivoli", 45.50, mezziRoma);
+        TrattaDAO t1 = new TrattaDAO(em);
+        Tratta tratta = new Tratta("Ponte Mammolo", "Tivoli", 45.50);
 //        t1.save(tratta);
+        Tratta trattaVera = t1.searchById(1);
+
+        TrattaMezziDAO tmd = new TrattaMezziDAO(em);
+        TrattaMezzi trattaMezzi = new TrattaMezzi(trattaVera, atac, 60);
+//        tmd.save(trattaMezzi);
+
+//        tmd.trattaPercorsa(1, 1);
+        t1.mediaTratta(1);
         em.close();
         emf.close();
 

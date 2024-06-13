@@ -3,6 +3,7 @@ package giovanni.DAO;
 import giovanni.entities.Tratta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 
 public class TrattaDAO {
     private EntityManager entityManager;
@@ -42,6 +43,27 @@ public class TrattaDAO {
             System.out.println(e.getMessage());
         }
 
+    }
+
+
+    public void mediaTratta(long idTratta) {
+        EntityTransaction trans = entityManager.getTransaction();
+        trans.begin();
+        Tratta found = searchById(idTratta);
+
+        Query query = entityManager.createQuery("SELECT AVG(t.TempoEffettivo) FROM TrattaMezzi t  WHERE t.tratta = :idTratta ");
+        query.setParameter("idTratta", found);
+
+        Double result = (Double) query.getSingleResult();
+
+        Query query1 = entityManager.createQuery("UPDATE Tratta t SET t.tempoMedioPercorrenza = :result WHERE t.id = :idTratta ");
+        query1.setParameter("result", result);
+        query1.setParameter("idTratta", found.getId());
+        entityManager.persist(found);
+        query1.executeUpdate();
+        trans.commit();
+
+        System.out.println("Tempo medio aggiornato");
     }
 
 }
