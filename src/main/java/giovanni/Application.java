@@ -76,7 +76,13 @@ public class Application {
 
 //        md.timbratura(2, 1);
 
+//        md.bigliettiVidimatiPerMezzo(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 12), 1);
 
+//        md.bigliettiVidimati(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
+
+//        TrattaDAO t1 = new TrattaDAO(em);
+//        Tratta tratta = new Tratta("Ponte Mammolo", "Tivoli", 45.50, mezziRoma);
+//        t1.save(tratta);
         em.close();
         emf.close();
 
