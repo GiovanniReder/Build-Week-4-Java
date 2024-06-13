@@ -1,6 +1,5 @@
 package giovanni.DAO;
 
-import giovanni.entities.Manutenzione;
 import giovanni.entities.Mezzi;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -37,7 +36,7 @@ public class MezziDAO {
                 trans.begin();
                 entityManager.remove(found);
                 trans.commit();
-                System.out.println("Mezzo con ID "+ id + " eliminato ");
+                System.out.println("Mezzo con ID " + id + " eliminato ");
             } else System.out.println("Elemento non trovato");
 
         } catch (Exception e) {
@@ -45,4 +44,6 @@ public class MezziDAO {
         }
 
     }
+
+
 }

@@ -3,9 +3,7 @@ package giovanni;
 import giovanni.DAO.BiglietteriaDAO;
 import giovanni.DAO.TesseraDAO;
 import giovanni.DAO.TitoloDiViaggioDAO;
-import giovanni.DAO.UtentiDAO;
 import giovanni.entities.*;
-import giovanni.enums.TipoAbbonamentoEnum;
 import giovanni.supplier.Suppliers;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -40,12 +38,10 @@ public class Application {
 
         BiglietteriaDAO bd = new BiglietteriaDAO(em);
 
-     //   DistributoreAutomatico da1 = new DistributoreAutomatico("Roma", true);
-    //    bd.save(da1);
-
-
-      //  Tessera tDB = td.searchById(2);
-
+        DistributoreAutomatico da1 = new DistributoreAutomatico("avellino", false);
+        Rivenditore r1 = new Rivenditore("Tufello");
+//        bd.save(r1);
+        Tessera tDB = td.searchById(2);
         Biglietteria daDB = bd.searchById(1);
 
        TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
@@ -55,20 +51,12 @@ public class Application {
        Biglietto biglietto1 = new Biglietto(LocalDate.now(), daDB , false  );
 
 
+//        tvd.numeroBigliettiVenduti(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
 
-       biglietto1.setValidato(true);
+//        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
 
-       tvd.save(biglietto1);
-
-
-
-
-       //  LocalDate creazioneAbbonamento1 = LocalDate.of(2023 , 5 , 12);
-       //   Abbonamento abbonamento1 = new Abbonamento(creazioneAbbonamento1 , daDB , TipoAbbonamentoEnum.MENSILE , tDB);
-
-       //    td.rinnovoTessera(2);
-
-       // tvd.numeroBigliettiVenduti(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13));
+//        tvd.verificaAbbonamentoDallaTessera(2);
+//        bd.creaBiglietto(4);
         em.close();
         emf.close();
 

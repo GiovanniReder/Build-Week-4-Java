@@ -1,8 +1,11 @@
 package giovanni.DAO;
 
-import giovanni.entities.Biglietteria;
+import giovanni.entities.*;
+import giovanni.enums.TipoAbbonamentoEnum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+
+import java.time.LocalDate;
 
 public class BiglietteriaDAO {
     private EntityManager entityManager;
@@ -45,5 +48,34 @@ public class BiglietteriaDAO {
 
     }
 
+    public void creaBiglietto(long idBiglietteria) {
+        Biglietteria biglietteria = searchById(idBiglietteria);
+
+        if (biglietteria instanceof DistributoreAutomatico && ((DistributoreAutomatico) biglietteria).getInFunzione()) {
+            TitoloDiViaggioDAO td = new TitoloDiViaggioDAO(entityManager);
+            Biglietto biglietto = new Biglietto(LocalDate.now(), biglietteria, false);
+            td.save(biglietto);
+        } else if (biglietteria instanceof Rivenditore) {
+            TitoloDiViaggioDAO td = new TitoloDiViaggioDAO(entityManager);
+            Biglietto biglietto = new Biglietto(LocalDate.now(), biglietteria, false);
+            td.save(biglietto);
+        } else System.out.println("Attenzione il distributore è fuori servizio");
+
+
+    }
+
+    public void creaAbbonamento(long idBiglietteria, TipoAbbonamentoEnum tipoAbbonamento, long idTessera) {
+        Biglietteria biglietteria = searchById(idBiglietteria);
+        TesseraDAO tesseraDao = new TesseraDAO(entityManager);
+        Tessera tessera = tesseraDao.searchById(idTessera);
+
+        if (biglietteria instanceof DistributoreAutomatico && ((DistributoreAutomatico) biglietteria).getInFunzione()) {
+            TitoloDiViaggioDAO td = new TitoloDiViaggioDAO(entityManager);
+            Abbonamento abbonamento = new Abbonamento(LocalDate.now(), biglietteria, tipoAbbonamento, tessera);
+            td.save(abbonamento);
+        } else System.out.println("Attenzione il distributore è fuori servizio");
+
+
+    }
 
 }
