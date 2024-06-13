@@ -55,6 +55,10 @@ public class BiglietteriaDAO {
             TitoloDiViaggioDAO td = new TitoloDiViaggioDAO(entityManager);
             Biglietto biglietto = new Biglietto(LocalDate.now(), biglietteria, false);
             td.save(biglietto);
+        } else if (biglietteria instanceof Rivenditore) {
+            TitoloDiViaggioDAO td = new TitoloDiViaggioDAO(entityManager);
+            Biglietto biglietto = new Biglietto(LocalDate.now(), biglietteria, false);
+            td.save(biglietto);
         } else System.out.println("Attenzione il distributore è fuori servizio");
 
 

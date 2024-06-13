@@ -3,10 +3,7 @@ package giovanni;
 import giovanni.DAO.BiglietteriaDAO;
 import giovanni.DAO.TesseraDAO;
 import giovanni.DAO.TitoloDiViaggioDAO;
-import giovanni.entities.Biglietteria;
-import giovanni.entities.Biglietto;
-import giovanni.entities.DistributoreAutomatico;
-import giovanni.entities.Tessera;
+import giovanni.entities.*;
 import giovanni.supplier.Suppliers;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -42,7 +39,8 @@ public class Application {
         BiglietteriaDAO bd = new BiglietteriaDAO(em);
 
         DistributoreAutomatico da1 = new DistributoreAutomatico("avellino", false);
-//        bd.save(da1);
+        Rivenditore r1 = new Rivenditore("Tufello");
+//        bd.save(r1);
         Tessera tDB = td.searchById(2);
         Biglietteria daDB = bd.searchById(1);
 
@@ -60,7 +58,7 @@ public class Application {
 //        tvd.titoliViaggioPerPuntoEmissione(LocalDate.of(2024, 6, 11), LocalDate.of(2024, 6, 13), 1);
 
 //        tvd.verificaAbbonamentoDallaTessera(2);
-//        bd.creaAbbonamento(2, TipoAbbonamentoEnum.MENSILE, 2);
+//        bd.creaBiglietto(4);
         em.close();
         emf.close();
 
