@@ -72,7 +72,9 @@ public class Application {
         Manutenzione manu1 = new Manutenzione(LocalDate.of(2023, 9, 12), LocalDate.of(2023, 10, 25), mezziRoma);
 //        manuDao.save(manu1);
 
-        manuDao.periodoManutenzione(1).forEach(System.out::println);
+//        manuDao.periodoManutenzione(1).forEach(System.out::println);
+
+//        md.timbratura(2, 1);
 
 
         em.close();
