@@ -87,6 +87,7 @@ public class PannelloControllo {
                 int scelta = Integer.parseInt(sc.nextLine());
 
 
+                operatore:
                 switch (scelta) {
                     case 1: {
                         System.out.println();
@@ -109,6 +110,33 @@ public class PannelloControllo {
                         System.out.println();
                         System.out.println("questa è la lista mezzi");
                         md.listaMezzi();
+                        System.out.println();
+                        System.out.println("premi 1 per controllare i biglietti vidimati su un determinato mezzo per un periodo di tempo");
+                        System.out.println("premi 0 per uscire");
+                        int controllo = Integer.parseInt(sc.nextLine());
+                        try {
+                            switch (controllo) {
+                                case 1: {
+                                    System.out.println();
+                                    System.out.println("per prima cosa scegli le date:");
+                                    LocalDate date1 = LocalDate.parse(sc.nextLine());
+                                    LocalDate date2 = LocalDate.parse(sc.nextLine());
+                                    System.out.println("ora scegli l'id del mezzo");
+                                    long idMezzo = Long.parseLong(sc.nextLine());
+                                    System.out.println("ecco a te il risultato:");
+                                    md.bigliettiVidimatiPerMezzo(date1, date2, idMezzo);
+                                    break;
+                                }
+                                case 0: {
+                                    break operatore;
+                                }
+                                default:
+                                    break;
+                            }
+
+                        } catch (Exception ex) {
+                            System.out.println("non hai scelto correttamente");
+                        }
                     }
                     case 4: {
                         System.out.println();
@@ -124,6 +152,34 @@ public class PannelloControllo {
                         break;
                     }
                     case 5: {
+                        System.out.println();
+                        System.out.println("lista delle tratte disponibili:");
+                        trattaD.listaTratte();
+                        System.out.println();
+                        System.out.println("premi 1 se vuoi calcolare il tempo medio di una tratta");
+                        System.out.println("premi 0 per uscire");
+                        int controllo = Integer.parseInt(sc.nextLine());
+                        switch (controllo) {
+                            case 1: {
+                                try {
+                                    System.out.println();
+                                    System.out.println("scegli l'id della tratta");
+                                    long idTratta = Long.parseLong(sc.nextLine());
+                                    System.out.println("ecco a te il risultato:");
+                                    trattaD.mediaTratta(idTratta);
+                                    break;
+
+                                } catch (Exception ex) {
+                                    System.out.println("non esiste una tratta con quell'id");
+                                }
+                            }
+                            case 0: {
+                                break operatore;
+                            }
+                            default:
+                                break;
+                        }
+
 
                     }
                     default:

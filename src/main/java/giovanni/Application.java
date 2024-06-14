@@ -12,6 +12,12 @@ public class Application {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
+//        Suppliers suppliers = new Suppliers();
+//        Biglietto biglietto = new Biglietto();
+//        Abbonamento abbonamento = new Abbonamento();
+//        suppliers.creaTitoliDiViaggio(biglietto);
+//        suppliers.creaTitoliDiViaggio(abbonamento);
+
         try {
             PannelloControllo.startApp();
         } catch (Exception ex) {

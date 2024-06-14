@@ -12,7 +12,6 @@ import jakarta.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 public class Suppliers {
@@ -92,15 +91,18 @@ public class Suppliers {
         for (int i = 0; i < 10; i++) {
             Random rmn = new Random();
             Biglietteria emessoDa = biglietteriaDAO.searchById(rmn.nextInt(1, 100));
-            Tessera tessera = tesseraDAO.searchById(rmn.nextInt(1, 10));
-            if (titoloDiViaggio instanceof Biglietto) {
-                Biglietto biglietto = new Biglietto(getRandomDate(), emessoDa);
-                titoloDiViaggioDAO.save(biglietto);
-            } else if (titoloDiViaggio instanceof Abbonamento) {
-                Abbonamento abbonamento = new Abbonamento(getRandomDate(), emessoDa, TipoAbbonamentoEnum.MENSILE, tessera);
-                titoloDiViaggioDAO.save(abbonamento);
-            } else {
-                System.out.println("Tipo di titolo non riconosciuto.");
+            if (!(emessoDa == null)) {
+                Tessera tessera = tesseraDAO.searchById(rmn.nextInt(1, 10));
+                if (titoloDiViaggio instanceof Biglietto) {
+                    Biglietto biglietto = new Biglietto(getRandomDate(), emessoDa);
+                    titoloDiViaggioDAO.save(biglietto);
+                } else if (titoloDiViaggio instanceof Abbonamento) {
+
+                    Abbonamento abbonamento = new Abbonamento(getRandomDate(), emessoDa, TipoAbbonamentoEnum.MENSILE, tessera);
+                    titoloDiViaggioDAO.save(abbonamento);
+                } else {
+                    System.out.println("Tipo di titolo non riconosciuto.");
+                }
             }
         }
     }
@@ -134,13 +136,13 @@ public class Suppliers {
         double min = 0.0;
         double max = 6.0;
         for (int i = 0; i < 10; i++) {
-        double randomDouble = min + (max - min) * rmn.nextDouble();
-        randomDouble = Math.floor(randomDouble * 100) / 100.0;
-        int randomInt = (int) randomDouble;
-        double doubleDec = randomDouble - randomInt;
-            doubleDec = Math.min(doubleDec,0.60);
-        randomDouble = randomInt + doubleDec;
-            Tratta tratta = new Tratta(faker.address().cityName(), faker.address().cityName(),randomDouble );
+            double randomDouble = min + (max - min) * rmn.nextDouble();
+            randomDouble = Math.floor(randomDouble * 100) / 100.0;
+            int randomInt = (int) randomDouble;
+            double doubleDec = randomDouble - randomInt;
+            doubleDec = Math.min(doubleDec, 0.60);
+            randomDouble = randomInt + doubleDec;
+            Tratta tratta = new Tratta(faker.address().cityName(), faker.address().cityName(), randomDouble);
             trattaDAO.save(tratta);
         }
     }
