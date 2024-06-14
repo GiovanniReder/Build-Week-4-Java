@@ -104,7 +104,7 @@ public class MezziDAO {
         query.setParameter("idMezzo", found);
 
 
-        System.out.println("Nel mezzo con " + found.getId() + " sono stati validati: " + query.getSingleResult() + " biglietti");
+        System.out.println("Nel mezzo con id " + found.getId() + " sono stati validati: " + query.getSingleResult() + " biglietti");
 
     }
 

@@ -20,6 +20,10 @@ public class TrattaMezzi {
     @Column(name = "tempo_effettivo_percorrenza")
     private double TempoEffettivo;
 
+    public TrattaMezzi() {
+
+    }
+
     public TrattaMezzi(Tratta tratta, Mezzi mezzi, double tempoEffettivo) {
         this.tratta = tratta;
         this.mezzi = mezzi;

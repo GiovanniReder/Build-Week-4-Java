@@ -24,6 +24,7 @@ public class Suppliers {
     TrattaDAO trattaDAO = new TrattaDAO(em);
     MezziDAO mezziDAO = new MezziDAO(em);
     TitoloDiViaggioDAO titoloDiViaggioDAO = new TitoloDiViaggioDAO(em);
+    TrattaMezziDAO trattaMezziDAO = new TrattaMezziDAO(em);
     Faker faker = new Faker();
 
 
@@ -146,5 +147,29 @@ public class Suppliers {
             trattaDAO.save(tratta);
         }
     }
+
+    public void creaTratteMezzi() {
+        Random rmn = new Random();
+        double min = 0.0;
+        double max = 6.0;
+        for (int i = 0; i < 10; i++) {
+            int id = rmn.nextInt(1, 20);
+            int rndmid = rmn.nextInt(1, 20);
+            Tratta tratta = trattaDAO.searchById(id);
+            Mezzi mezziLista = mezziDAO.searchById(rndmid);
+            double randomDouble = min + (max - min) * rmn.nextDouble();
+            randomDouble = Math.floor(randomDouble * 100) / 100.0;
+            int randomInt = (int) randomDouble;
+            double doubleDec = randomDouble - randomInt;
+            doubleDec = Math.min(doubleDec, 0.60);
+            randomDouble = randomInt + doubleDec;
+            if (mezziLista != null && tratta != null) {
+                TrattaMezzi trattaMezzi = new TrattaMezzi(tratta, mezziLista, randomDouble);
+                trattaMezziDAO.save(trattaMezzi);
+            }
+        }
+    }
+
+
 }
 

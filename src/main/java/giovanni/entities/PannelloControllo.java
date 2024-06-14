@@ -2,6 +2,7 @@ package giovanni.entities;
 
 import giovanni.DAO.*;
 import giovanni.enums.TipoAbbonamentoEnum;
+import giovanni.enums.TipoMezzoEnum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -22,6 +23,7 @@ public class PannelloControllo {
     static TrattaDAO trattaD = new TrattaDAO(em);
     static TesseraDAO tesseraDAO = new TesseraDAO(em);
     static UtentiDAO utentiDAO = new UtentiDAO(em);
+    static TrattaMezziDAO trattaMezziDAO = new TrattaMezziDAO(em);
 
 
     public static void startApp() {
@@ -36,7 +38,7 @@ public class PannelloControllo {
             System.out.println();
 
             System.out.println("sei un operatore oppure un utente?");
-            System.out.println("1 operatore");
+            System.out.println("1. operatore");
             System.out.println("2. Utente registrato");
             System.out.println("3. Utente non registrato");
             System.out.println("0. Esci");
@@ -46,24 +48,18 @@ public class PannelloControllo {
 
                 switch (scelta) {
                     case 1: {
-                        System.out.println("1 per inserire la password");
-                        int scelta2 = Integer.parseInt(sc.nextLine());
                         boolean passwordCorretta = false;
                         do {
-                            switch (scelta2) {
+                            switch (scelta) {
                                 case 1: {
                                     System.out.println("Inserisci la tua password");
-                                    System.out.println("2 per tornare al menu principale");
+
                                     String password = sc.nextLine();
                                     if (password.equals("Team5")) {
                                         operatore();
                                         passwordCorretta = true; //
                                     } else {
                                         System.out.println("Password errata riprova");
-                                        if (password.equals("2")) {
-                                            break;
-                                        }
-
                                     }
                                     break;
                                 }
@@ -199,6 +195,22 @@ public class PannelloControllo {
                         int biglietteriaID = Integer.parseInt(sc.nextLine());
                         Biglietteria biglietteriaScelta = bd.searchById(biglietteriaID);
                         Biglietto biglietto = new Biglietto(LocalDate.now(), biglietteriaScelta);
+                        td.save(biglietto);
+                        long bigliettoDaUsare = biglietto.getId();
+                        System.out.println("premi 1 se vuoi validarlo");
+                        System.out.println("0 per uscire");
+                        int scelta3 = Integer.parseInt(sc.nextLine());
+                        switch (scelta3) {
+                            case 1: {
+                                System.out.println();
+                                md.listaMezzi().forEach(System.out::println);
+                                System.out.println();
+                                System.out.println("scegli l'id del mezzo dove vuoi timbrare il biglietto");
+                                long idMezzo = Long.parseLong(sc.nextLine());
+                                md.timbratura(bigliettoDaUsare, idMezzo);
+                                break;
+                            }
+                        }
                         break;
                     }
                     case 0: {
@@ -233,12 +245,13 @@ public class PannelloControllo {
     public static void operatore() {
         while (true) {
             System.out.println();
-            System.out.println("decidi cosa vuoi fare:");
-            System.out.println("premi 1 per controllare la lista delle manutenzione dei mezzi");
-            System.out.println("premi 2 per controllare quanti biglietti sono stati vidimati in una determinato periodo di tempo");
-            System.out.println("premi 3 per controllare la lista mezzi");
-            System.out.println("premi 4 per controllare il totale di titoli di viaggio emessi in un periodo di tempo per un punto di emissione");
-            System.out.println("premi 5 per visualizzare la lista delle tratte percorse");
+            System.out.println("scegli un opzione:");
+            System.out.println(" 1. per controllare i periodi di manutenzione filtrati per data");
+            System.out.println(" 2. per controllare quanti biglietti sono stati vidimati in una determinato periodo di tempo");
+            System.out.println(" 3. per controllare la lista mezzi");
+            System.out.println(" 4. per controllare il totale di titoli di viaggio emessi in un periodo di tempo per un punto di emissione");
+            System.out.println(" 5. per visualizzare la lista delle tratte percorse");
+            System.out.println(" 6. Inserisci un nuovo mezzo nel database");
 
             try {
                 int scelta = Integer.parseInt(sc.nextLine());
@@ -248,15 +261,19 @@ public class PannelloControllo {
                 switch (scelta) {
                     case 1: {
                         System.out.println();
-                        System.out.println("Ecco qua la tua lista");
-                        mtd.listaManutenzioni().forEach(System.out::println);
+                        System.out.println("inserisci data inizio:");
+                        LocalDate date1 = LocalDate.parse(sc.nextLine());
+                        System.out.println("inserisci data fine:");
+                        LocalDate date2 = LocalDate.parse(sc.nextLine());
+                        mtd.sonoInManutenzione(date1, date2).forEach(System.out::println);
                         System.out.println();
                         break;
                     }
                     case 2: {
                         System.out.println();
-                        System.out.println("Inserisci le due date:");
+                        System.out.println("inserisci data inizio:");
                         LocalDate date1 = LocalDate.parse(sc.nextLine());
+                        System.out.println("inserisci data fine:");
                         LocalDate date2 = LocalDate.parse(sc.nextLine());
                         System.out.println("questo è il totale dei biglietti vidimati:");
                         md.bigliettiVidimati(date1, date2);
@@ -266,7 +283,7 @@ public class PannelloControllo {
                     case 3: {
                         System.out.println();
                         System.out.println("questa è la lista mezzi");
-                        md.listaMezzi();
+                        md.listaMezzi().forEach(System.out::println);
                         System.out.println();
                         System.out.println("premi 1 per controllare i biglietti vidimati su un determinato mezzo per un periodo di tempo");
                         System.out.println("premi 0 per uscire");
@@ -275,14 +292,16 @@ public class PannelloControllo {
                             switch (controllo) {
                                 case 1: {
                                     System.out.println();
-                                    System.out.println("per prima cosa scegli le date:");
+                                    System.out.println("inserisci data inizio:");
                                     LocalDate date1 = LocalDate.parse(sc.nextLine());
+                                    System.out.println("inserisci data fine:");
                                     LocalDate date2 = LocalDate.parse(sc.nextLine());
                                     System.out.println("ora scegli l'id del mezzo");
                                     long idMezzo = Long.parseLong(sc.nextLine());
                                     System.out.println("ecco a te il risultato:");
                                     md.bigliettiVidimatiPerMezzo(date1, date2, idMezzo);
-                                    break;
+                                    break operatore;
+
                                 }
                                 case 0: {
                                     break operatore;
@@ -301,29 +320,31 @@ public class PannelloControllo {
                         bd.listaBiglietterie().forEach(System.out::println);
                         System.out.println("Scegli l'id della biglietteria da controllare");
                         long idBiglietteria = Integer.parseInt(sc.nextLine());
-                        System.out.println("ora scegli le date da controllare");
+                        System.out.println("inserisci data inizio:");
                         LocalDate date1 = LocalDate.parse(sc.nextLine());
+                        System.out.println("inserisci data fine:");
                         LocalDate date2 = LocalDate.parse(sc.nextLine());
-                        System.out.println("questi sono i biglietti stampati");
+                        System.out.println();
                         td.titoliViaggioPerPuntoEmissione(date1, date2, idBiglietteria);
                         break;
                     }
                     case 5: {
                         System.out.println();
-                        System.out.println("lista delle tratte disponibili:");
-                        trattaD.listaTratte();
+                        System.out.println("lista delle tratte percorse dai mezzi:");
+                        trattaMezziDAO.listaTratteMezzi().forEach(System.out::println);
                         System.out.println();
-                        System.out.println("premi 1 se vuoi calcolare il tempo medio di una tratta");
+                        System.out.println("premi 1 per visualizzare il tempo medio di percorrenza della tratta");
                         System.out.println("premi 0 per uscire");
                         int controllo = Integer.parseInt(sc.nextLine());
                         switch (controllo) {
                             case 1: {
                                 try {
                                     System.out.println();
-                                    System.out.println("scegli l'id della tratta");
+                                    System.out.println("inserisci l'id della tratta");
                                     long idTratta = Long.parseLong(sc.nextLine());
-                                    System.out.println("ecco a te il risultato:");
                                     trattaD.mediaTratta(idTratta);
+                                    Tratta searchTratta = trattaD.searchById(idTratta);
+                                    System.out.println(searchTratta.getTempoMedioPercorrenza());
                                     break;
 
                                 } catch (Exception ex) {
@@ -334,10 +355,39 @@ public class PannelloControllo {
                                 break operatore;
                             }
                             default:
-                                break;
+                                break operatore;
                         }
 
 
+                    }
+                    case 6: {
+                        System.out.println();
+                        System.out.println("Inserisci il tipo di mezzo:");
+                        System.out.println("1. TRAM ");
+                        System.out.println("2. BUS ");
+                        try {
+                            int controllo = Integer.parseInt(sc.nextLine());
+                            TipoMezzoEnum tipoMezzo = null;
+                            switch (controllo) {
+                                case 1:
+                                    tipoMezzo = TipoMezzoEnum.TRAM;
+                                    break;
+                                case 2:
+                                    tipoMezzo = TipoMezzoEnum.BUS;
+                                    break;
+                                default:
+                                    System.out.println("Scelta non valida. Riprova.");
+                                    break;
+                            }
+                            if (tipoMezzo != null) {
+                                Mezzi mezzo = new Mezzi(tipoMezzo);
+                                md.save(mezzo);
+                                ;
+                            }
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Input non valido. Inserisci un numero.");
+                        }
+                        break;
                     }
                     default:
                         break;

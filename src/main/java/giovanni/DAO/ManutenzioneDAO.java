@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ManutenzioneDAO {
@@ -62,6 +63,17 @@ public class ManutenzioneDAO {
 
         TypedQuery<Manutenzione> query = entityManager.createQuery("SELECT mt FROM Mezzi m JOIN m.manutenzione mt WHERE m.id = :idMezzo", Manutenzione.class);
         query.setParameter("idMezzo", found.getId());
+
+        return query.getResultList();
+
+    }
+
+    public List<Manutenzione> sonoInManutenzione(LocalDate date1, LocalDate date2) {
+
+
+        TypedQuery<Manutenzione> query = entityManager.createQuery("SELECT m FROM Manutenzione m  WHERE  m.dataInizioManutenzione between  :date1 and :date2", Manutenzione.class);
+        query.setParameter("date1", date1);
+        query.setParameter("date2", date2);
 
         return query.getResultList();
 

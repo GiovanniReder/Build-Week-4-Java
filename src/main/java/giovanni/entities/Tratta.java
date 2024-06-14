@@ -69,7 +69,6 @@ public class Tratta {
                 "id=" + id +
                 ", partenza='" + partenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
-                ", tempoMedioPercorrenza=" + tempoMedioPercorrenza +
                 '}';
     }
 }
