@@ -19,7 +19,7 @@ public class UtentiDAO {
             trans.begin();
             entityManager.persist(utenti);
             trans.commit();
-            System.out.println("Titolo di viaggio: " + utenti.getNome() + " creato con successo!");
+            System.out.println("Utente: " + utenti.getNome() + " creato con successo!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

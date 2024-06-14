@@ -68,7 +68,7 @@ public class MezziDAO {
             query.executeUpdate();
             trans.commit();
             System.out.println("BIGLIETTO VALIDATO");
-        } else System.out.println("Il biglietto è stato gia validato in data");
+        } else System.out.println("Il biglietto risulta già validato ");
 
     }
 

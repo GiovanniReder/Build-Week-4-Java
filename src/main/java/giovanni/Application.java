@@ -19,9 +19,12 @@ public class Application {
         EntityManager em = emf.createEntityManager();
         System.out.println("Hello World!");
         Suppliers suppliers = new Suppliers();
-        //  suppliers.creaBiglietti2();
-        //  suppliers.creaMezzi2();
-        //  suppliers.creaUtenti(); NON FUNZIONA!!
+        DistributoreAutomatico distributoreAutomatico = new DistributoreAutomatico();
+        Rivenditore rivenditore = new Rivenditore();
+  //    suppliers.creaRivenditore(distributoreAutomatico);
+  //    suppliers.creaRivenditore(rivenditore);
+        suppliers.creaMezzi(TipoMezzoEnum.BUS);
+
 
 
 //        UtentiDAO ud = new UtentiDAO(em);
@@ -40,11 +43,11 @@ public class Application {
         DistributoreAutomatico da1 = new DistributoreAutomatico("avellino", false);
         Rivenditore r1 = new Rivenditore("Tufello");
 //        bd.save(r1);
-        Tessera tDB = td.searchById(2);
-        Biglietteria daDB = bd.searchById(1);
+ //       Tessera tDB = td.searchById(2);
+   //     Biglietteria daDB = bd.searchById(1);
 
         TitoloDiViaggioDAO tvd = new TitoloDiViaggioDAO(em);
-        Biglietto ab1 = new Biglietto(LocalDate.now(), daDB, false);
+ //       Biglietto ab1 = new Biglietto(LocalDate.now(), daDB, false);
 //        tvd.save(ab1);
 
 //        LocalDate creazioneAbbonamento1 = LocalDate.of(2023 , 5 , 12);
@@ -64,7 +67,7 @@ public class Application {
         Mezzi tram = new Mezzi(TipoMezzoEnum.TRAM);
 //        md.save(bus);
 //        md.save(tram);
-        Mezzi atac = md.searchById(1);
+      //  Mezzi atac = md.searchById(1);
 //
 //        List<Mezzi> mezziRoma = new ArrayList<>();
 //        mezziRoma.add(tram);
@@ -85,14 +88,14 @@ public class Application {
         TrattaDAO t1 = new TrattaDAO(em);
         Tratta tratta = new Tratta("Ponte Mammolo", "Tivoli", 45.50);
 //        t1.save(tratta);
-        Tratta trattaVera = t1.searchById(1);
+  //      Tratta trattaVera = t1.searchById(1);
 
         TrattaMezziDAO tmd = new TrattaMezziDAO(em);
-        TrattaMezzi trattaMezzi = new TrattaMezzi(trattaVera, atac, 60);
+ //       TrattaMezzi trattaMezzi = new TrattaMezzi(trattaVera, atac, 60);
 //        tmd.save(trattaMezzi);
 
 //        tmd.trattaPercorsa(1, 1);
-        t1.mediaTratta(1);
+//        t1.mediaTratta(1);
         em.close();
         emf.close();
 

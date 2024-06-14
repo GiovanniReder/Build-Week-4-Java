@@ -1,6 +1,7 @@
 package giovanni.DAO;
 
 import giovanni.entities.Tessera;
+import giovanni.entities.Utenti;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
@@ -65,5 +66,11 @@ public class TesseraDAO {
 
     }
 
+    public boolean verificaUtenteRegistrati(Utenti utente) {
+        Query query = entityManager.createQuery("SELECT COUNT(t) FROM Tessera t WHERE t.utente = :utente");
+        query.setParameter("utente", utente);
+        Long count = (Long) query.getSingleResult();
+        return count > 0;
+    }
 
 }
