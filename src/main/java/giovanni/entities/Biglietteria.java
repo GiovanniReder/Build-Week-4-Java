@@ -1,6 +1,7 @@
 package giovanni.entities;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -17,7 +18,8 @@ public abstract class Biglietteria {
 
     private String luogo;
 
-    public Biglietteria() {}
+    public Biglietteria() {
+    }
 
     public Biglietteria(String luogo) {
         this.luogo = luogo;
@@ -45,9 +47,9 @@ public abstract class Biglietteria {
 
     @Override
     public String toString() {
-        return "Biglietteria{" +
+        return
                 "id=" + idRivenditore +
-                ", luogo='" + luogo + '\'' +
-                '}';
+                        ", luogo='" + luogo + '\'' +
+                        '}';
     }
 }

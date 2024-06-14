@@ -6,8 +6,10 @@ import giovanni.entities.TitoloDiViaggio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MezziDAO {
     private EntityManager entityManager;
@@ -48,6 +50,12 @@ public class MezziDAO {
             System.out.println(e.getMessage());
         }
 
+    }
+
+
+    public List<Mezzi> listaMezzi() {
+        TypedQuery<Mezzi> query = entityManager.createQuery("Select m From Mezzi m", Mezzi.class);
+        return query.getResultList();
     }
 
 
