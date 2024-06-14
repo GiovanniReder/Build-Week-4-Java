@@ -49,6 +49,14 @@ public class ManutenzioneDAO {
 
     }
 
+    public List<Manutenzione> listaManutenzioni() {
+
+        TypedQuery<Manutenzione> query = entityManager.createQuery("select mt from Manutenzione mt", Manutenzione.class);
+
+        return query.getResultList();
+
+    }
+
     public List<Manutenzione> periodoManutenzione(long idManutenzione) {
         Manutenzione found = searchById(idManutenzione);
 
