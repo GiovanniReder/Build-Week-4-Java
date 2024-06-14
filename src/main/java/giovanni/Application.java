@@ -1,5 +1,6 @@
 package giovanni;
 
+import giovanni.entities.PannelloCarmen;
 import giovanni.entities.PannelloControllo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,7 +14,7 @@ public class Application {
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
         try {
-            PannelloControllo.startApp();
+            PannelloCarmen.startApp();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } finally {
