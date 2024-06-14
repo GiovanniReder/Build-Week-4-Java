@@ -13,7 +13,7 @@ public class Biglietto extends TitoloDiViaggio {
 
     // COLLEGATO AI MEZZI
     //  @OneToOne(mappedBy = "idBigliettiTimbrato")
-    private Boolean validato;
+    private Boolean validato= false;
 
     private LocalDate dataValidazione;
 
@@ -28,9 +28,8 @@ public class Biglietto extends TitoloDiViaggio {
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataEmissione, Biglietteria emessoDa, Boolean validato) {
+    public Biglietto(LocalDate dataEmissione, Biglietteria emessoDa) {
         super(dataEmissione, emessoDa);
-        this.validato = validato;
     }
 
     public Boolean getValidato() {
@@ -42,6 +41,13 @@ public class Biglietto extends TitoloDiViaggio {
         System.out.println("Il biglietto è stato validato");
     }
 
+    public Mezzi getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzi mezzo) {
+        this.mezzo = mezzo;
+    }
 
     public LocalDate getDataValidazione() {
         return dataValidazione;

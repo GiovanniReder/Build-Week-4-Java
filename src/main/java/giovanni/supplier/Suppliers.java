@@ -2,13 +2,15 @@ package giovanni.supplier;
 
 import com.github.javafaker.Faker;
 import giovanni.DAO.*;
-import giovanni.entities.DistributoreAutomatico;
-import giovanni.entities.Mezzi;
-import giovanni.entities.Utenti;
+import giovanni.entities.*;
 import giovanni.enums.TipoMezzoEnum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
+import java.time.LocalDate;
+import java.util.Optional;
+import java.util.Random;
 
 public class Suppliers {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Trasporto_pubblico");
@@ -21,23 +23,29 @@ public class Suppliers {
     TitoloDiViaggioDAO titoloDiViaggioDAO = new TitoloDiViaggioDAO(em);
     Faker faker = new Faker();
 
-    public void creaBiglietti() {
-        for (int i = 0; i < 50; i++) {
-            DistributoreAutomatico distributore = new DistributoreAutomatico(faker.address().cityName(), true);
-            biglietteriaDAO.save(distributore);
-        }
+
+    private LocalDate getRandomDate() {
+        Random random = new Random();
+        int minDay = (int) LocalDate.of(2022, 1, 1).toEpochDay();
+        int maxDay = (int) LocalDate.of(2023, 12, 31).toEpochDay();
+        long randomDay = minDay + random.nextInt(maxDay - minDay);
+        return LocalDate.ofEpochDay(randomDay);
     }
 
-    ;
 
-    public void creaBiglietti2() {
-        for (int i = 0; i < 50; i++) {
-            DistributoreAutomatico distributore = new DistributoreAutomatico(faker.address().cityName(), false);
-            biglietteriaDAO.save(distributore);
+    public void creaRivenditore(Biglietteria tipoBiglietteria) {
+        for (int i = 0; i < 10; i++) {
+            if (tipoBiglietteria instanceof DistributoreAutomatico) {
+                DistributoreAutomatico distributore = new DistributoreAutomatico(faker.address().cityName(), true);
+                biglietteriaDAO.save(distributore);
+            } else if (tipoBiglietteria instanceof Rivenditore) {
+                Rivenditore rivenditore = new Rivenditore(faker.address().cityName());
+                biglietteriaDAO.save(rivenditore);
+            } else {
+                System.out.println("Tipo di biglietteria non riconosciuto.");
+            }
         }
     }
-
-    ;
 
     public void creaUtenti() {
         for (int i = 0; i < 100; i++) {
@@ -46,35 +54,26 @@ public class Suppliers {
         }
     }
 
-    ;
-
     public void creaTessera() {
         for (int i = 0; i < 10; i++) {
+            Random rmn = new Random();
+            Utenti utente = utentiDAO.searchById(rmn.nextInt(1, 100));
+            if (!tesseraDAO.verificaUtenteRegistrati(utente)) {
+                Tessera nuovaTessera = new Tessera(getRandomDate(), utente);
+                tesseraDAO.save(nuovaTessera);
+                System.out.println("Tessera creata per l'utente " + utente.getId());
+            } else {
+                System.out.println("L'utente  ha già una tessera.");
+            }
 
-//            Tessera tessera = new Tessera(LocalDate.of(2023, 5, 23));
-//            tesseraDAO.save(tessera);
-//
+
+            }
         }
+            public void creaMezzi (TipoMezzoEnum tipoMezzoEnum) {
+                for (int i = 0; i < 10; i++) {
+                    Mezzi mezzi = new Mezzi(tipoMezzoEnum);
+                    mezziDAO.save(mezzi);
+                }
+
     }
-
-    ;
-
-    public void creaMezzi() {
-        for (int i = 0; i < 50; i++) {
-            Mezzi mezzi = new Mezzi(TipoMezzoEnum.BUS, faker.number().randomDouble(2, 20, 120));
-            mezziDAO.save(mezzi);
-        }
-    }
-
-    ;
-
-    public void creaMezzi2() {
-        for (int i = 0; i < 50; i++) {
-            Mezzi mezzi = new Mezzi(TipoMezzoEnum.TRAM, faker.number().randomDouble(2, 20, 120));
-            mezziDAO.save(mezzi);
-        }
-    }
-
-    ;
-
 }

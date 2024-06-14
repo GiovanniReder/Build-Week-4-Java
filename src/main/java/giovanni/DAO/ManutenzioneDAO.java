@@ -1,9 +1,11 @@
 package giovanni.DAO;
 
-import giovanni.entities.Biglietteria;
 import giovanni.entities.Manutenzione;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class ManutenzioneDAO {
     private EntityManager entityManager;
@@ -37,12 +39,23 @@ public class ManutenzioneDAO {
                 trans.begin();
                 entityManager.remove(found);
                 trans.commit();
-                System.out.println("Manutenzione con ID "+ id + " eliminata ");
+                System.out.println("Manutenzione con ID " + id + " eliminata ");
             } else System.out.println("Elemento non trovato");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+
+    }
+
+    public List<Manutenzione> periodoManutenzione(long idManutenzione) {
+        Manutenzione found = searchById(idManutenzione);
+
+        TypedQuery<Manutenzione> query = entityManager.createQuery("SELECT mt FROM Mezzi m JOIN m.manutenzione mt WHERE m.id = :idMezzo", Manutenzione.class);
+        query.setParameter("idMezzo", found.getId());
+
+        return query.getResultList();
 
     }
 }
