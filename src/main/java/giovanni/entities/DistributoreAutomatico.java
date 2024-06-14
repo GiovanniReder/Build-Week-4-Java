@@ -1,7 +1,5 @@
 package giovanni.entities;
 
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
@@ -12,7 +10,8 @@ public class DistributoreAutomatico extends Biglietteria {
 
     private Boolean inFunzione;
 
-    public DistributoreAutomatico() {}
+    public DistributoreAutomatico() {
+    }
 
     public DistributoreAutomatico(String luogo, Boolean inFunzione) {
         super(luogo);
@@ -31,7 +30,6 @@ public class DistributoreAutomatico extends Biglietteria {
     public String toString() {
         return "DistributoreAutomatico{" +
                 "inFunzione=" + inFunzione +
-                ", luogo='" + getLuogo() + '\'' +
-                '}';
+                " " + super.toString();
     }
 }

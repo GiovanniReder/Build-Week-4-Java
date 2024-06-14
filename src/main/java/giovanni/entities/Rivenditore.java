@@ -7,7 +7,8 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("rivenditore")
 public class Rivenditore extends Biglietteria {
 
-    public Rivenditore() {}
+    public Rivenditore() {
+    }
 
     public Rivenditore(String luogo) {
         super(luogo);
@@ -15,8 +16,6 @@ public class Rivenditore extends Biglietteria {
 
     @Override
     public String toString() {
-        return "Rivenditore{" +
-                "luogo='" + getLuogo() + '\'' +
-                '}';
+        return "Rivenditore{ " + super.toString();
     }
 }

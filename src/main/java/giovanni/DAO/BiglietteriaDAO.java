@@ -4,8 +4,10 @@ import giovanni.entities.*;
 import giovanni.enums.TipoAbbonamentoEnum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class BiglietteriaDAO {
     private EntityManager entityManager;
@@ -46,6 +48,11 @@ public class BiglietteriaDAO {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public List<Biglietteria> listaBiglietterie() {
+        TypedQuery<Biglietteria> query = entityManager.createQuery("select b from Biglietteria b", Biglietteria.class);
+        return query.getResultList();
     }
 
     public void creaBiglietto(long idBiglietteria) {
