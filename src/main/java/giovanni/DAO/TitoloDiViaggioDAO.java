@@ -110,5 +110,12 @@ public class TitoloDiViaggioDAO {
         }
     }
 
+    public boolean verificaBiglietteriaEsistente(Biglietteria biglietteria) {
+        Query query = entityManager.createQuery("SELECT COUNT(t) FROM TitoliDiViaggio t WHERE t.emessoDa = :biglietteria");
+        query.setParameter("biglietteria", biglietteria);
+        Long count = (Long) query.getSingleResult();
+        return count > 0;
+    }
+
 
 }

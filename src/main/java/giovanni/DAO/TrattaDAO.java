@@ -4,6 +4,9 @@ import giovanni.entities.Tratta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class TrattaDAO {
     private EntityManager entityManager;
@@ -43,6 +46,11 @@ public class TrattaDAO {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public List<Tratta> listaTratte() {
+        TypedQuery<Tratta> query = entityManager.createQuery("select b from Tratta b", Tratta.class);
+        return query.getResultList();
     }
 
 
