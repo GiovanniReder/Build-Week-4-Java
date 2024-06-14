@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Application {
 
@@ -23,7 +24,13 @@ public class Application {
         Rivenditore rivenditore = new Rivenditore();
   //    suppliers.creaRivenditore(distributoreAutomatico);
   //    suppliers.creaRivenditore(rivenditore);
-        suppliers.creaMezzi(TipoMezzoEnum.BUS);
+  //      suppliers.creaMezzi(TipoMezzoEnum.BUS);
+        TitoloDiViaggio biglietto = new Biglietto();
+  //      suppliers.creaTitoliDiViaggio(biglietto);
+        TitoloDiViaggio abbonamento = new Abbonamento();
+  //      suppliers.creaTitoliDiViaggio(abbonamento);
+  //      suppliers.creaManutenzione();
+      suppliers.creaTratte();
 
 
 
