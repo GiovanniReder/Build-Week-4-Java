@@ -1,6 +1,5 @@
 package giovanni;
 
-import giovanni.entities.PannelloCarmen;
 import giovanni.entities.PannelloControllo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -20,7 +19,7 @@ public class Application {
 //        suppliers.creaTitoliDiViaggio(abbonamento);
 
         try {
-            PannelloCarmen.startApp();
+            PannelloControllo.startApp();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } finally {
